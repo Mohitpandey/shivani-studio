@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivani — Singer & Musician</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a96e;
+      --gold-light: #e8d5aa;
+      --ink: #1a1410;
+      --paper: #faf7f2;
+      --muted: #7a6e62;
+      --rose: #d4856a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(250,247,242,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,169,110,0.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300; letter-spacing: 0.12em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 7vw, 6.5rem);
+      font-weight: 300; line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero-name em {
+      font-style: italic; color: var(--gold);
+      display: block;
+    }
+    .hero-subtitle {
+      font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2.5rem;
+    }
+    .hero-bio {
+      font-size: 1rem; line-height: 1.8; color: var(--muted);
+      max-width: 28rem; margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1.5rem; align-items: center;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--ink);
+      padding: 0.85rem 2rem;
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      text-decoration: none; font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-ghost {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 1px solid currentColor; padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); }
+
+    .hero-image {
+      position: relative; overflow: hidden;
+      background: #e8e0d4;
+    }
+    .hero-image::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #d4c4aa 0%, #c4b090 100%);
+    }
+    .hero-image-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+    }
+    .hero-image-placeholder .ph-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-image-placeholder .ph-icon svg { opacity: 0.5; }
+    .hero-image-placeholder p {
+      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .hero-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2rem; left: 5rem;
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-scroll-hint::before {
+      content: ''; width: 40px; height: 1px; background: var(--gold);
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 5rem; }
+    .section-label {
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 300; line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ── MUSIC / AUDIO ── */
+    #music { background: var(--ink); color: var(--paper); }
+    #music .section-title { color: var(--paper); }
+    #music .section-label { color: var(--gold); }
+
+    .audio-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .audio-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,169,110,0.2);
+      padding: 1.75rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .audio-card:hover {
+      background: rgba(201,169,110,0.08);
+      border-color: rgba(201,169,110,0.4);
+    }
+    .audio-card-tag {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .audio-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 300;
+      color: var(--paper); margin-bottom: 0.4rem;
+    }
+    .audio-card-meta {
+      font-size: 0.75rem; color: rgba(250,247,242,0.4);
+      margin-bottom: 1.25rem;
+    }
+    .audio-player {
+      width: 100%;
+      accent-color: var(--gold);
+    }
+    audio { width: 100%; }
+    audio::-webkit-media-controls-panel { background: rgba(255,255,255,0.05); }
+
+    .audio-placeholder {
+      border: 1px dashed rgba(201,169,110,0.3);
+      padding: 1.5rem;
+      text-align: center;
+      color: rgba(250,247,242,0.3);
+      font-size: 0.75rem; letter-spacing: 0.1em;
+    }
+
+    /* ── VIDEOS ── */
+    #videos { background: var(--paper); }
+    .video-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .video-card { }
+    .video-embed {
+      width: 100%; aspect-ratio: 16/9;
+      background: #e8e0d4; margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-embed-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .video-embed-placeholder svg { opacity: 0.3; }
+    .video-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; margin-bottom: 0.25rem;
+    }
+    .video-desc { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── SOCIAL ── */
+    #connect {
+      background: #f0ebe2;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; padding: 0;
+    }
+    .connect-text {
+      padding: 6rem 4rem 6rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .connect-links {
+      padding: 6rem 5rem 6rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 1.5rem;
+      border-left: 1px solid rgba(201,169,110,0.2);
+    }
+    .social-link {
+      display: flex; align-items: center; gap: 1.25rem;
+      text-decoration: none; color: var(--ink);
+      padding: 1.25rem 1.5rem;
+      border: 1px solid rgba(201,169,110,0.25);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .social-link:hover {
+      background: rgba(201,169,110,0.1);
+      border-color: var(--gold);
+      transform: translateX(4px);
+    }
+    .social-link-icon {
+      width: 36px; height: 36px;
+      background: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .social-link-icon svg { width: 18px; height: 18px; }
+    .social-link-label {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 0.15rem;
+    }
+    .social-link-handle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--ink);
+    }
+    .social-link-placeholder { color: var(--muted); font-style: italic; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(250,247,242,0.4);
+      padding: 2.5rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.75rem; letter-spacing: 0.08em;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 300; letter-spacing: 0.15em;
+      color: var(--gold-light);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-text { padding: 6rem 1.5rem 3rem; }
+      .hero-image { height: 50vw; min-height: 260px; }
+      section { padding: 4rem 1.5rem; }
+      #connect { grid-template-columns: 1fr; }
+      .connect-text, .connect-links { padding: 3rem 1.5rem; }
+      .connect-links { border-left: none; border-top: 1px solid rgba(201,169,110,0.2); }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem 1.5rem; }
+      .hero-scroll-hint { left: 1.5rem; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Shivani</a>
+    <ul class="nav-links">
+      <li><a href="#music">Music</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text fade-in">
+      <p class="hero-eyebrow">Singer &amp; Musician</p>
+      <h1 class="hero-name">
+        Shivani<em>Studio</em>
+      </h1>
+      <p class="hero-subtitle">Classical · Contemporary · Soul</p>
+      <p class="hero-bio">
+        On a musical journey — learning, growing, and sharing the joy of song. 
+        Trained at Artium Academy, weaving classical foundations with heartfelt contemporary expression.
+      </p>
+      <div class="hero-cta">
+        <a href="#music" class="btn-primary">Listen Now</a>
+        <a href="#connect" class="btn-ghost">Follow Along</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <!-- To add your photo: replace the placeholder below with: <img src="your-photo.jpg" alt="Shivani" /> -->
+      <div class="hero-image-placeholder">
+        <div class="ph-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <p>Your photo here</p>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">Scroll to explore</div>
+  </section>
+
+  <!-- MUSIC / AUDIO -->
+  <section id="music">
+    <p class="section-label fade-in">Original Recordings</p>
+    <h2 class="section-title fade-in">Listen</h2>
+    <div class="audio-grid">
+
+      <!-- Song 1 — placeholder -->
+      <div class="audio-card fade-in">
+        <p class="audio-card-tag">Original</p>
+        <p class="audio-card-title">Song Title Here</p>
+        <p class="audio-card-meta">Raag · 3:24</p>
+        <div class="audio-placeholder">
+          Audio file coming soon<br/>
+          <small style="opacity:0.6;">(.mp3 will go here)</small>
+        </div>
+      </div>
+
+      <!-- Song 2 — placeholder -->
+      <div class="audio-card fade-in">
+        <p class="audio-card-tag">Cover</p>
+        <p class="audio-card-title">Song Title Here</p>
+        <p class="audio-card-meta">Bollywood · 4:10</p>
+        <div class="audio-placeholder">
+          Audio file coming soon
+        </div>
+      </div>
+
+      <!-- Song 3 — placeholder -->
+      <div class="audio-card fade-in">
+        <p class="audio-card-tag">Original</p>
+        <p class="audio-card-title">Song Title Here</p>
+        <p class="audio-card-meta">Classical · 5:02</p>
+        <div class="audio-placeholder">
+          Audio file coming soon
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section id="videos">
+    <p class="section-label fade-in">Performances &amp; Reels</p>
+    <h2 class="section-title fade-in">Watch</h2>
+    <div class="video-grid">
+
+      <!-- Video 1 — placeholder (replace src with real YouTube embed URL) -->
+      <div class="video-card fade-in">
+        <div class="video-embed">
+          <!-- To embed a YouTube video, replace this placeholder with:
+               <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+          <div class="video-embed-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>YouTube video here</span>
+          </div>
+        </div>
+        <p class="video-title">Performance Title</p>
+        <p class="video-desc">Short description of this performance or reel</p>
+      </div>
+
+      <!-- Video 2 — placeholder -->
+      <div class="video-card fade-in">
+        <div class="video-embed">
+          <div class="video-embed-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>YouTube video here</span>
+          </div>
+        </div>
+        <p class="video-title">Performance Title</p>
+        <p class="video-desc">Short description of this performance or reel</p>
+      </div>
+
+      <!-- Video 3 — placeholder -->
+      <div class="video-card fade-in">
+        <div class="video-embed">
+          <div class="video-embed-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>YouTube video here</span>
+          </div>
+        </div>
+        <p class="video-title">Performance Title</p>
+        <p class="video-desc">Short description of this performance or reel</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section id="connect">
+    <div class="connect-text">
+      <p class="section-label fade-in">Stay in Touch</p>
+      <h2 class="section-title fade-in">Connect<br/>with Me</h2>
+      <p class="fade-in" style="color: var(--muted); line-height: 1.8; max-width: 26rem;">
+        Follow my journey — behind-the-scenes practice sessions, new recordings, 
+        and live performances. All the music, unfiltered.
+      </p>
+    </div>
+    <div class="connect-links">
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/YOUR_HANDLE" class="social-link fade-in" target="_blank">
+        <div class="social-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="#c9a96e"/>
+          </svg>
+        </div>
+        <div>
+          <span class="social-link-label">Instagram</span>
+          <!-- Replace YOUR_HANDLE with actual handle, e.g. @shivanisings -->
+          <span class="social-link-handle social-link-placeholder">@your_handle</span>
+        </div>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://youtube.com/@YOUR_CHANNEL" class="social-link fade-in" target="_blank">
+        <div class="social-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#c9a96e" stroke="none"/>
+          </svg>
+        </div>
+        <div>
+          <span class="social-link-label">YouTube</span>
+          <span class="social-link-handle social-link-placeholder">Your Channel</span>
+        </div>
+      </a>
+
+      <!-- Email / contact -->
+      <a href="mailto:hello@shivani.studio" class="social-link fade-in">
+        <div class="social-link-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div>
+          <span class="social-link-label">Email</span>
+          <span class="social-link-handle">hello@shivani.studio</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Shivani Studio</span>
+    <span>© 2026 · shivani.studio · All rights reserved</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
